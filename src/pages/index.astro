@@ -1,3 +1,9 @@
 ---
-return Astro.redirect('/zh');
+// src/pages/index.astro
+// Redirect to browser's preferred language
+const url = new URL(Astro.request.url);
+const acceptLang = Astro.request.headers.get('accept-language') || '';
+const prefersZh = acceptLang.toLowerCase().includes('zh');
+const targetLang = prefersZh ? 'zh' : 'en';
+return Astro.redirect(`/${targetLang}/`);
 ---

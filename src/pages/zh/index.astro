@@ -1,14 +1,25 @@
 ---
-import '../../styles/global.css';
+// src/pages/zh/index.astro
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import TechStack from '../../components/TechStack.astro';
+import Projects from '../../components/Projects.astro';
+import Contact from '../../components/Contact.astro';
+
+const lang = 'zh' as const;
 ---
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>个人网站</title>
-  </head>
-  <body>
-    <h1 class="text-2xl font-bold">你好</h1>
-  </body>
-</html>
+
+<Base
+  title="Your Name — 个人网站"
+  description="芯片前端设计方向研究生，对AI、Infra与前端开发有兴趣。"
+  currentPath={Astro.url.pathname}
+>
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Experience lang={lang} />
+  <TechStack lang={lang} />
+  <Projects lang={lang} />
+  <Contact lang={lang} />
+</Base>

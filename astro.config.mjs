@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   output: 'static',
-  base: '/AboutMe',
+  base: process.env.CF_PAGES ? '' : '/AboutMe',
   integrations: [tailwind()],
   i18n: {
     defaultLocale: 'zh',

@@ -1,6 +1,5 @@
 ---
 // src/components/About.astro
-import ScrollReveal from './ScrollReveal.astro';
 
 // Import markdown as raw text, then render with basic markdown-to-HTML
 const zhModules = import.meta.glob('../data/zh/about.md', { eager: true, query: '?raw' });
@@ -13,10 +12,9 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const heading = lang === 'zh' ? '关于' : 'About';
+const heading = lang === 'zh' ? 'About' : 'About';
 const raw = lang === 'zh' ? zhRaw : enRaw;
 
-// Simple markdown-to-HTML: convert headings, bold, lists, paragraphs
 function renderMd(text: string): string {
   const lines = text.split('\n');
   let html = '';
@@ -25,21 +23,24 @@ function renderMd(text: string): string {
   for (const line of lines) {
     const trimmed = line.trim();
 
-    // Skip empty lines
     if (!trimmed) {
       if (inList) { html += '</ul>'; inList = false; }
       continue;
     }
 
+    // Skip frontmatter
+    if (trimmed === '---') continue;
+    if (trimmed.startsWith('title:')) continue;
+
     // H3
     if (trimmed.startsWith('### ')) {
       if (inList) { html += '</ul>'; inList = false; }
-      html += `<h3 class="text-xl font-semibold text-text-primary mt-8 mb-3">${trimmed.slice(4)}</h3>`;
+      html += `<h3 class="text-lg font-serif font-semibold text-text-primary mt-8 mb-3">${trimmed.slice(4)}</h3>`;
     }
     // H2
     else if (trimmed.startsWith('## ')) {
       if (inList) { html += '</ul>'; inList = false; }
-      html += `<h2 class="text-xl font-semibold text-text-primary mt-8 mb-3">${trimmed.slice(3)}</h2>`;
+      html += `<h2 class="text-lg font-serif font-semibold text-text-primary mt-8 mb-3">${trimmed.slice(3)}</h2>`;
     }
     // List item
     else if (trimmed.startsWith('- ')) {
@@ -58,19 +59,18 @@ function renderMd(text: string): string {
 }
 
 function processInline(text: string): string {
-  return text.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+  // **bold** -> <strong>
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+  // Advisor highlight: text containing "Advisor:" or "导师：" gets gold treatment
+  text = text.replace(/(Advisor:|导师：)\s*(.+)/g,
+    '<span class="text-text-secondary">$1</span> <span class="text-accent-light font-medium">$2</span>');
+  return text;
 }
 ---
 
-<section id="about" class="py-32 px-6">
-  <div class="max-w-content mx-auto">
-    <ScrollReveal>
-      <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-12">{heading}</h2>
-    </ScrollReveal>
-    <ScrollReveal>
-      <div class="max-w-none text-text-secondary leading-relaxed">
-        <div set:html={renderMd(raw)} />
-      </div>
-    </ScrollReveal>
+<section id="about" class="py-16">
+  <h2 class="font-serif text-2xl font-bold text-text-primary mb-6">{heading}</h2>
+  <div class="max-w-none text-text-secondary leading-relaxed">
+    <div set:html={renderMd(raw)} />
   </div>
 </section>

@@ -1,0 +1,33 @@
+---
+// src/components/Publications.astro
+import PublicationCard from './PublicationCard.astro';
+import type { Publication } from '../types';
+
+interface Props {
+  lang: 'zh' | 'en';
+  publications: Publication[];
+  ownerName: string;
+}
+
+const { lang, publications, ownerName } = Astro.props;
+
+const heading = lang === 'zh' ? 'Selected Publications' : 'Selected Publications';
+const viewAll = lang === 'zh' ? 'View All →' : 'View All →';
+
+// Show featured first, then by year desc
+const sorted = [...publications]
+  .sort((a, b) => {
+    if (a.featured !== b.featured) return a.featured ? -1 : 1;
+    return b.year - a.year;
+  });
+---
+
+<section id="publications" class="py-16">
+  <div class="flex items-baseline justify-between mb-6">
+    <h2 class="font-serif text-2xl font-bold text-text-primary">{heading}</h2>
+  </div>
+
+  {sorted.map((pub) => (
+    <PublicationCard pub={pub} lang={lang} ownerName={ownerName} />
+  ))}
+</section>

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "pub-1",
+    "title": {
+      "zh": "一种面向 RISC-V 处理器的高效前端设计方案",
+      "en": "An Efficient Front-End Design Scheme for RISC-V Processors"
+    },
+    "authors": ["Your Name", "Advisor Name", "Co-author C"],
+    "journal": { "zh": "集成电路设计期刊 (JICD), 2026", "en": "Journal of IC Design (JICD), 2026" },
+    "year": 2026,
+    "description": {
+      "zh": "提出了一种改进的指令预取与分支预测协同优化方法，通过解耦取指与译码阶段的关键路径，显著减少了流水线停顿周期。在 FPGA 原型验证中取得了 18% 的 IPC 提升。",
+      "en": "Proposed an improved instruction prefetch and branch prediction co-optimization method that significantly reduces pipeline stall cycles by decoupling critical paths in the fetch and decode stages. Achieved 18% IPC improvement in FPGA prototype verification."
+    },
+    "link": "https://doi.org/10.xxxx/xxxxx",
+    "doi": "10.xxxx/xxxxx",
+    "featured": true
+  },
+  {
+    "id": "pub-2",
+    "title": {
+      "zh": "基于 Systolic Array 的 Transformer 推理加速器设计",
+      "en": "A Systolic Array-Based Inference Accelerator for Transformer Models"
+    },
+    "authors": ["Co-author A", "Your Name", "Co-author B"],
+    "journal": { "zh": "AI 硬件架构研讨会 (AIHWS), 2025", "en": "Workshop on AI Hardware Systems (AIHWS), 2025" },
+    "year": 2025,
+    "description": {
+      "zh": "设计了面向 Transformer 自注意力机制的脉动阵列加速器，通过权值静态数据流与双缓冲策略，在 Xilinx FPGA 上实现了 2.3× 的能效比提升。",
+      "en": "Designed a systolic array accelerator targeting Transformer self-attention mechanisms, achieving 2.3× energy efficiency improvement on Xilinx FPGA through weight-stationary dataflow and double-buffering strategies."
+    },
+    "link": "https://doi.org/10.xxxx/yyyyy",
+    "featured": true
+  },
+  {
+    "id": "pub-3",
+    "title": {
+      "zh": "开源 EDA 工具链在先进工艺节点下的验证方法研究",
+      "en": "Validation Methodology for Open-Source EDA Toolchains at Advanced Technology Nodes"
+    },
+    "authors": ["Your Name", "Co-author D"],
+    "journal": { "zh": "电子设计自动化大会 (DAC) 海报, 2025", "en": "Design Automation Conference (DAC) Poster, 2025" },
+    "year": 2025,
+    "description": {
+      "zh": "系统评估了 OpenROAD、Yosys 等开源 EDA 工具在 28nm 工艺节点下的综合与布局布线质量，与商业工具进行了全面对比分析。",
+      "en": "Systematically evaluated synthesis and place-and-route quality of open-source EDA tools including OpenROAD and Yosys at 28nm technology node, with comprehensive comparison against commercial tools."
+    },
+    "featured": true
+  }
+]

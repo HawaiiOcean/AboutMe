@@ -1,0 +1,58 @@
+---
+// src/components/ContentNav.astro
+interface NavLink {
+  id: string;
+  label: { zh: string; en: string };
+}
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const links: NavLink[] = [
+  { id: 'about', label: { zh: 'About', en: 'About' } },
+  { id: 'publications', label: { zh: 'Publications', en: 'Publications' } },
+];
+---
+
+<nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-sm border-b border-border">
+  <div class="max-w-3xl mx-auto px-8 py-3 flex items-center gap-1">
+    {links.map((link) => (
+      <a
+        href={`#${link.id}`}
+        data-nav={link.id}
+        class="px-4 py-2 rounded-lg text-sm text-text-secondary
+               hover:text-text-primary transition-colors
+               data-[active=true]:bg-nav-active data-[active=true]:text-text-primary data-[active=true]:font-medium"
+      >
+        {link.label[lang]}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<script>
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = [...navLinks]
+    .map((link) => document.getElementById((link as HTMLElement).dataset.nav!))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            const el = link as HTMLElement;
+            el.dataset.active = el.dataset.nav === id ? 'true' : 'false';
+          });
+        }
+      });
+    },
+    { threshold: 0, rootMargin: '-20% 0px -70% 0px' }
+  );
+
+  sections.forEach((section) => observer.observe(section!));
+</script>

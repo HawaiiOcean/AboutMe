@@ -1,25 +1,21 @@
 ---
 // src/pages/en/index.astro
 import Base from '../../layouts/Base.astro';
-import Hero from '../../components/Hero.astro';
 import About from '../../components/About.astro';
-import Experience from '../../components/Experience.astro';
-import TechStack from '../../components/TechStack.astro';
-import Projects from '../../components/Projects.astro';
-import Contact from '../../components/Contact.astro';
+import Publications from '../../components/Publications.astro';
+import publicationsData from '../../data/publications.json';
+import type { Publication } from '../../types';
 
 const lang = 'en' as const;
+const pubs = publicationsData as Publication[];
+const ownerName = 'Your Name';
 ---
 
 <Base
-  title="Your Name — Personal Website"
-  description="M.S. student in chip front-end design, passionate about AI, Infra, and front-end development."
+  title="Your Name — Academic Homepage"
+  description="M.S. student in chip front-end design. Research interests include AI accelerator architecture and RISC-V processor design."
   currentPath={Astro.url.pathname}
 >
-  <Hero lang={lang} />
   <About lang={lang} />
-  <Experience lang={lang} />
-  <TechStack lang={lang} />
-  <Projects lang={lang} />
-  <Contact lang={lang} />
+  <Publications lang={lang} publications={pubs} ownerName={ownerName} />
 </Base>

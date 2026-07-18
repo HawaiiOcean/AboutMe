@@ -1,0 +1,28 @@
+{
+  "name": { "zh": "Your Name", "en": "Your Name" },
+  "title": { "zh": "硕士研究生 · 芯片前端设计", "en": "M.S. Student · Chip Front-End Design" },
+  "affiliation": { "zh": "XX大学 集成电路学院", "en": "School of IC, XX University" },
+  "location": "Beijing, China",
+  "email": "your@email.com",
+  "social": {
+    "google_scholar": "https://scholar.google.com/",
+    "orcid": "https://orcid.org/",
+    "github": "https://github.com/username",
+    "linkedin": "https://linkedin.com/in/username"
+  },
+  "research_interests": {
+    "zh": [
+      "芯片前端设计与验证",
+      "AI 加速器架构",
+      "RISC-V 处理器设计",
+      "高层次综合 (HLS)"
+    ],
+    "en": [
+      "Chip Front-End Design & Verification",
+      "AI Accelerator Architecture",
+      "RISC-V Processor Design",
+      "High-Level Synthesis (HLS)"
+    ]
+  },
+  "avatar_initials": "YN"
+}

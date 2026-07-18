@@ -1,8 +1,10 @@
 ---
 // src/layouts/Base.astro
 import { getLangFromUrl } from '../i18n/utils';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
+import ContentNav from '../components/ContentNav.astro';
+import profileData from '../data/profile.json';
+import type { Profile } from '../types';
 
 interface Props {
   title: string;
@@ -13,6 +15,7 @@ interface Props {
 const { title, description, currentPath } = Astro.props;
 const url = new URL(currentPath, Astro.site ?? 'http://localhost:4321');
 const lang = getLangFromUrl(url);
+const profile = profileData as unknown as Profile;
 ---
 
 <!doctype html>
@@ -23,21 +26,25 @@ const lang = getLangFromUrl(url);
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- Inter & JetBrains Mono from Google Fonts -->
+    <!-- Playfair Display (serif) + Inter (sans) + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="min-h-screen flex flex-col">
-    <Nav currentPath={currentPath} lang={lang} />
-    <main class="flex-1">
-      <slot />
-    </main>
-    <Footer lang={lang} />
+  <body>
+    <div class="lg:flex">
+      <Sidebar lang={lang} profile={profile} currentPath={currentPath} />
+      <div class="lg:ml-[320px] min-h-screen w-full">
+        <ContentNav lang={lang} />
+        <main class="px-8 py-12 max-w-3xl mx-auto">
+          <slot />
+        </main>
+      </div>
+    </div>
   </body>
 </html>

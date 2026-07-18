@@ -1,0 +1,206 @@
+---
+// src/components/Sidebar.astro
+import LangSwitch from './LangSwitch.astro';
+import type { Profile } from '../types';
+
+interface Props {
+  lang: 'zh' | 'en';
+  profile: Profile;
+  currentPath: string;
+}
+
+const { lang, profile, currentPath } = Astro.props;
+
+const riHeading = lang === 'zh' ? '研究兴趣' : 'Research Interests';
+const interests = profile.research_interests[lang];
+
+// Social icon SVG paths
+const icons: Record<string, { viewBox: string; path: string }> = {
+  email: {
+    viewBox: '0 0 16 16',
+    path: 'M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-3.553-3.241-1.192.715a1 1 0 0 1-.442.117h-.001a1 1 0 0 1-.442-.117l-1.192-.715-3.553 3.241A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z',
+  },
+  location: {
+    viewBox: '0 0 16 16',
+    path: 'M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z',
+  },
+  scholar: {
+    viewBox: '0 0 24 24',
+    path: 'M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z',
+  },
+  orcid: {
+    viewBox: '0 0 24 24',
+    path: 'M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-3.797-3.722h-2.522z',
+  },
+  github: {
+    viewBox: '0 0 16 16',
+    path: 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z',
+  },
+  linkedin: {
+    viewBox: '0 0 16 16',
+    path: 'M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z',
+  },
+};
+---
+
+<aside
+  class="lg:fixed lg:top-0 lg:left-0 lg:w-[320px] lg:h-screen lg:overflow-y-auto
+         w-full
+         bg-white border-r border-border
+         flex flex-col items-center
+         px-6 py-10 lg:py-12
+         text-center"
+>
+  <!-- Avatar -->
+  <div class="w-28 h-28 rounded-xl bg-surface flex items-center justify-center mb-5 shrink-0">
+    <span class="text-3xl font-serif font-bold text-text-secondary select-none">
+      {profile.avatar_initials}
+    </span>
+  </div>
+
+  <!-- Name -->
+  <h1 class="text-2xl font-serif font-bold text-text-primary mb-2">
+    {profile.name[lang]}
+  </h1>
+
+  <!-- Title + Affiliation -->
+  <p class="text-sm text-text-secondary leading-relaxed mb-1">
+    {profile.title[lang]}
+  </p>
+  {profile.affiliation && (
+    <p class="text-xs text-text-secondary mb-5">
+      {profile.affiliation[lang]}
+    </p>
+  )}
+
+  <!-- Social Icons Row -->
+  <div class="flex items-center gap-3 mb-6 flex-wrap justify-center">
+    <!-- Email -->
+    <a href={`mailto:${profile.email}`}
+       class="text-text-secondary hover:text-accent transition-colors"
+       aria-label="Email" title="Email">
+      <svg width="18" height="18" viewBox={icons.email.viewBox} fill="currentColor">
+        <path d={icons.email.path} />
+      </svg>
+    </a>
+
+    <!-- Location (non-clickable) -->
+    <span class="text-text-secondary cursor-default" title={profile.location}>
+      <svg width="16" height="16" viewBox={icons.location.viewBox} fill="currentColor">
+        <path d={icons.location.path} />
+      </svg>
+    </span>
+
+    <!-- Google Scholar -->
+    {profile.social.google_scholar && (
+      <a href={profile.social.google_scholar} target="_blank" rel="noopener noreferrer"
+         class="text-text-secondary hover:text-accent transition-colors"
+         aria-label="Google Scholar" title="Google Scholar">
+        <svg width="17" height="17" viewBox={icons.scholar.viewBox} fill="currentColor">
+          <path d={icons.scholar.path} />
+        </svg>
+      </a>
+    )}
+
+    <!-- ORCID -->
+    {profile.social.orcid && (
+      <a href={profile.social.orcid} target="_blank" rel="noopener noreferrer"
+         class="text-text-secondary hover:text-accent transition-colors"
+         aria-label="ORCID" title="ORCID">
+        <svg width="17" height="17" viewBox={icons.orcid.viewBox} fill="currentColor">
+          <path d={icons.orcid.path} />
+        </svg>
+      </a>
+    )}
+
+    <!-- GitHub -->
+    {profile.social.github && (
+      <a href={profile.social.github} target="_blank" rel="noopener noreferrer"
+         class="text-text-secondary hover:text-accent transition-colors"
+         aria-label="GitHub" title="GitHub">
+        <svg width="18" height="18" viewBox={icons.github.viewBox} fill="currentColor">
+          <path d={icons.github.path} />
+        </svg>
+      </a>
+    )}
+
+    <!-- LinkedIn -->
+    {profile.social.linkedin && (
+      <a href={profile.social.linkedin} target="_blank" rel="noopener noreferrer"
+         class="text-text-secondary hover:text-accent transition-colors"
+         aria-label="LinkedIn" title="LinkedIn">
+        <svg width="18" height="18" viewBox={icons.linkedin.viewBox} fill="currentColor">
+          <path d={icons.linkedin.path} />
+        </svg>
+      </a>
+    )}
+  </div>
+
+  <!-- Research Interests Card -->
+  <div class="w-full bg-surface rounded-xl p-4 text-left mb-5">
+    <h3 class="text-xs font-semibold text-text-primary uppercase tracking-wider mb-3">
+      {riHeading}
+    </h3>
+    <ul class="list-disc list-inside space-y-1.5">
+      {interests.map((item) => (
+        <li class="text-sm text-text-secondary leading-relaxed">{item}</li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Language Switch -->
+  <div class="mb-5">
+    <LangSwitch currentPath={currentPath} />
+  </div>
+
+  <!-- Heart Like Button -->
+  <button
+    id="like-btn"
+    class="group flex items-center gap-2 text-sm text-text-secondary hover:text-red-500 transition-colors"
+    aria-label={lang === 'zh' ? '点赞' : 'Like'}
+  >
+    <svg id="heart-icon" width="18" height="18" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round"
+         class="transition-colors">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+    <span id="like-count">0</span>
+  </button>
+</aside>
+
+<script>
+  const btn = document.getElementById('like-btn')!;
+  const icon = document.getElementById('heart-icon')!;
+  const countEl = document.getElementById('like-count')!;
+
+  // Load state from localStorage
+  let liked = localStorage.getItem('site-liked') === 'true';
+  let count = parseInt(localStorage.getItem('site-like-count') || '0', 10);
+
+  function updateUI() {
+    if (liked) {
+      icon.setAttribute('fill', '#ef4444');
+      icon.setAttribute('stroke', '#ef4444');
+    } else {
+      icon.setAttribute('fill', 'none');
+      icon.setAttribute('stroke', 'currentColor');
+    }
+    countEl.textContent = String(count);
+  }
+
+  updateUI();
+
+  btn.addEventListener('click', () => {
+    if (!liked) {
+      liked = true;
+      count += 1;
+    } else {
+      liked = false;
+      count = Math.max(0, count - 1);
+    }
+    localStorage.setItem('site-liked', String(liked));
+    localStorage.setItem('site-like-count', String(count));
+    updateUI();
+  });
+</script>

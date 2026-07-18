@@ -1,0 +1,26 @@
+---
+// src/components/About.astro
+import ScrollReveal from './ScrollReveal.astro';
+import ZhAbout from '../data/zh/about.md';
+import EnAbout from '../data/en/about.md';
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const heading = lang === 'zh' ? '关于' : 'About';
+---
+
+<section id="about" class="py-32 px-6">
+  <div class="max-w-content mx-auto">
+    <ScrollReveal>
+      <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-12">{heading}</h2>
+    </ScrollReveal>
+    <ScrollReveal>
+      <div class="prose prose-lg max-w-none text-text-secondary">
+        {lang === 'zh' ? <ZhAbout.Content /> : <EnAbout.Content />}
+      </div>
+    </ScrollReveal>
+  </div>
+</section>

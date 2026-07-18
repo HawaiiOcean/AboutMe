@@ -1,0 +1,30 @@
+---
+// src/components/Hero.astro
+import ScrollReveal from './ScrollReveal.astro';
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const tagline = lang === 'zh' ? '芯片前端设计' : 'Chip Front-End Design';
+const subtitle = lang === 'zh'
+  ? '研一学生 · 探索芯片、AI 与前端开发的交汇点'
+  : 'M.S. Student · Exploring the intersection of Chip Design, AI & Frontend';
+---
+
+<section id="hero" class="min-h-screen flex items-center justify-center px-6 pt-16">
+  <ScrollReveal>
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="text-sm font-mono text-accent mb-4 tracking-widest uppercase">
+        {tagline}
+      </p>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-text-primary mb-6 leading-tight">
+        Your Name
+      </h1>
+      <p class="text-lg sm:text-xl text-text-secondary leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+  </ScrollReveal>
+</section>

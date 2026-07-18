@@ -1,0 +1,26 @@
+---
+// src/components/LangSwitch.astro
+import { getRouteForLang, getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const url = new URL(currentPath, 'http://localhost:4321');
+const currentLang = getLangFromUrl(url);
+const targetLang = currentLang === 'zh' ? 'en' : 'zh';
+const targetRoute = getRouteForLang(url, targetLang);
+const label = currentLang === 'zh' ? 'EN' : '中';
+---
+
+<a
+  href={targetRoute}
+  class="inline-flex items-center justify-center w-9 h-9 rounded-full
+         text-sm font-medium text-text-secondary hover:text-accent
+         hover:bg-accent/5 transition-colors duration-200
+         focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+  aria-label={currentLang === 'zh' ? 'Switch to English' : '切换到中文'}
+>
+  {label}
+</a>

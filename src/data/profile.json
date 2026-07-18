@@ -1,14 +1,11 @@
 {
-  "name": { "zh": "Your Name", "en": "Your Name" },
-  "title": { "zh": "硕士研究生 · 芯片前端设计", "en": "M.S. Student · Chip Front-End Design" },
-  "affiliation": { "zh": "XX大学 集成电路学院", "en": "School of IC, XX University" },
-  "location": "Beijing, China",
-  "email": "your@email.com",
+  "name": { "zh": "桐月不寒", "en": "Hawaii Ocean" },
+  "title": { "zh": "上海交通大学集成电路科学与工程硕士", "en": "M.S. Student · IC" },
+  "affiliation": { "zh": "上海交通大学 集成电路学院", "en": "School of IC, SJTU" },
+  "location": "Shanghai, China",
+  "email": "oceanhan0420@gmail.com",
   "social": {
-    "google_scholar": "https://scholar.google.com/",
-    "orcid": "https://orcid.org/",
-    "github": "https://github.com/username",
-    "linkedin": "https://linkedin.com/in/username"
+    "github": "https://github.com/HawaiiOcean"
   },
   "research_interests": {
     "zh": [

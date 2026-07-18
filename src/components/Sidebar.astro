@@ -52,10 +52,8 @@ const icons: Record<string, { viewBox: string; path: string }> = {
          text-center"
 >
   <!-- Avatar -->
-  <div class="w-28 h-28 rounded-xl bg-surface flex items-center justify-center mb-5 shrink-0">
-    <span class="text-3xl font-serif font-bold text-text-secondary select-none">
-      {profile.avatar_initials}
-    </span>
+  <div class="w-28 h-28 rounded-xl overflow-hidden mb-5 shrink-0">
+    <img src={import.meta.env.BASE_URL + 'avatar.jpg'} alt={profile.name[lang]} class="w-full h-full object-cover" />
   </div>
 
   <!-- Name -->

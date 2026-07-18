@@ -1,8 +1,12 @@
 ---
 // src/components/About.astro
 import ScrollReveal from './ScrollReveal.astro';
-import ZhAbout from '../data/zh/about.md';
-import EnAbout from '../data/en/about.md';
+
+// Import markdown as raw text, then render with basic markdown-to-HTML
+const zhModules = import.meta.glob('../data/zh/about.md', { eager: true, query: '?raw' });
+const enModules = import.meta.glob('../data/en/about.md', { eager: true, query: '?raw' });
+const zhRaw = (zhModules['../data/zh/about.md'] as any)?.default ?? '';
+const enRaw = (enModules['../data/en/about.md'] as any)?.default ?? '';
 
 interface Props {
   lang: 'zh' | 'en';
@@ -10,6 +14,52 @@ interface Props {
 
 const { lang } = Astro.props;
 const heading = lang === 'zh' ? '关于' : 'About';
+const raw = lang === 'zh' ? zhRaw : enRaw;
+
+// Simple markdown-to-HTML: convert headings, bold, lists, paragraphs
+function renderMd(text: string): string {
+  const lines = text.split('\n');
+  let html = '';
+  let inList = false;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // Skip empty lines
+    if (!trimmed) {
+      if (inList) { html += '</ul>'; inList = false; }
+      continue;
+    }
+
+    // H3
+    if (trimmed.startsWith('### ')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<h3 class="text-xl font-semibold text-text-primary mt-8 mb-3">${trimmed.slice(4)}</h3>`;
+    }
+    // H2
+    else if (trimmed.startsWith('## ')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<h2 class="text-xl font-semibold text-text-primary mt-8 mb-3">${trimmed.slice(3)}</h2>`;
+    }
+    // List item
+    else if (trimmed.startsWith('- ')) {
+      if (!inList) { html += '<ul class="list-disc pl-5 space-y-1">'; inList = true; }
+      html += `<li>${processInline(trimmed.slice(2))}</li>`;
+    }
+    // Paragraph
+    else {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<p class="mb-4">${processInline(trimmed)}</p>`;
+    }
+  }
+  if (inList) { html += '</ul>'; }
+
+  return html;
+}
+
+function processInline(text: string): string {
+  return text.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+}
 ---
 
 <section id="about" class="py-32 px-6">
@@ -18,8 +68,8 @@ const heading = lang === 'zh' ? '关于' : 'About';
       <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-12">{heading}</h2>
     </ScrollReveal>
     <ScrollReveal>
-      <div class="prose prose-lg max-w-none text-text-secondary">
-        {lang === 'zh' ? <ZhAbout.Content /> : <EnAbout.Content />}
+      <div class="max-w-none text-text-secondary leading-relaxed">
+        <div set:html={renderMd(raw)} />
       </div>
     </ScrollReveal>
   </div>

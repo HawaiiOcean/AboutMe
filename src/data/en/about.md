@@ -4,15 +4,16 @@ title: About Me
 
 ## About Me
 
-I'm a first-year master's student specializing in chip front-end design, with a strong interest in AI algorithms, AI infrastructure, and front-end development. I enjoy exploring the low-level principles of computer architecture as much as I love crafting elegant user interfaces with code.
+M.S. student at the School of Integrated Circuits, Shanghai Jiao Tong University, specializing in chip front-end design and verification. Currently interning at ByteDance's AI Chip division, working on functional-level modeling and simulation toolchain development for AI accelerators. Deeply interested in computer architecture, AI accelerator design, and RISC-V processor development.
+
+**Advisor:** Prof. XXX, Shanghai Jiao Tong University
 
 ### Education
 
-- **XX University** — M.S. in Integrated Circuit Engineering (2025 - 2028)
-- **XX University** — B.S. in Electronic Science and Technology (2021 - 2025)
+- **Shanghai Jiao Tong University** — M.S. in Integrated Circuit Science & Engineering (2026 - 2029)
+- **Shanghai Jiao Tong University** — B.S. in Microelectronic Science & Engineering (2022 - 2026), GPA 91.46/100, Rank 2/72
 
-### Research Interests
+### Honors
 
-- Chip front-end design & verification
-- AI accelerator architecture
-- RISC-V processor design
+- National College IC Innovation Competition, National First Prize (2025)
+- 2022-2024 B-level & C-level Merit Scholarships

@@ -2,48 +2,47 @@
   {
     "id": "pub-1",
     "title": {
-      "zh": "一种面向 RISC-V 处理器的高效前端设计方案",
-      "en": "An Efficient Front-End Design Scheme for RISC-V Processors"
+      "zh": "高性能 RISC-V SoC 设计与验证",
+      "en": "High-Performance RISC-V SoC Design and Verification"
     },
-    "authors": ["Your Name", "Advisor Name", "Co-author C"],
-    "journal": { "zh": "集成电路设计期刊 (JICD), 2026", "en": "Journal of IC Design (JICD), 2026" },
+    "authors": ["韩汪洋"],
+    "journal": { "zh": "本科毕业设计 · 上海交通大学, 2026", "en": "Undergraduate Thesis · SJTU, 2026" },
     "year": 2026,
     "description": {
-      "zh": "提出了一种改进的指令预取与分支预测协同优化方法，通过解耦取指与译码阶段的关键路径，显著减少了流水线停顿周期。在 FPGA 原型验证中取得了 18% 的 IPC 提升。",
-      "en": "Proposed an improved instruction prefetch and branch prediction co-optimization method that significantly reduces pipeline stall cycles by decoupling critical paths in the fetch and decode stages. Achieved 18% IPC improvement in FPGA prototype verification."
+      "zh": "基于 RISC-V C908 处理器完成 SoC 系统设计，构建 AXI/AHB/APB 三级总线架构，实现存储与多外设模块集成与地址映射。完成 AXI 到 UCIe 接口适配逻辑，实现地址映射与数据通路转换，编写 C 语言测试程序进行系统级验证。",
+      "en": "Designed a complete SoC system based on the RISC-V C908 processor with AXI/AHB/APB three-level bus architecture, implementing memory and peripheral integration. Completed AXI-to-UCIe interface adaptation logic for address mapping and data path conversion, with C-level system verification."
     },
-    "link": "https://doi.org/10.xxxx/xxxxx",
-    "doi": "10.xxxx/xxxxx",
+    "link": "https://github.com/HawaiiOcean",
     "featured": true
   },
   {
     "id": "pub-2",
     "title": {
-      "zh": "基于 Systolic Array 的 Transformer 推理加速器设计",
-      "en": "A Systolic Array-Based Inference Accelerator for Transformer Models"
+      "zh": "基于 RISC-V 的 Transformer/CNN 硬件加速器设计",
+      "en": "RISC-V Based Transformer/CNN Hardware Accelerator Design"
     },
-    "authors": ["Co-author A", "Your Name", "Co-author B"],
-    "journal": { "zh": "AI 硬件架构研讨会 (AIHWS), 2025", "en": "Workshop on AI Hardware Systems (AIHWS), 2025" },
+    "authors": ["韩汪洋"],
+    "journal": { "zh": "大学生创新项目 · 上海交通大学, 2025", "en": "Innovation Project · SJTU, 2025" },
     "year": 2025,
     "description": {
-      "zh": "设计了面向 Transformer 自注意力机制的脉动阵列加速器，通过权值静态数据流与双缓冲策略，在 Xilinx FPGA 上实现了 2.3× 的能效比提升。",
-      "en": "Designed a systolic array accelerator targeting Transformer self-attention mechanisms, achieving 2.3× energy efficiency improvement on Xilinx FPGA through weight-stationary dataflow and double-buffering strategies."
+      "zh": "搭建卷积神经网络硬件电路，完成架构设计、RTL 设计、验证平台搭建与逻辑仿真。基于 SMIC 0.18μm 工艺完成逻辑综合、时序分析与物理实现。实现 200K/s 输入特征图处理能力，时钟频率 96.7MHz，功耗 1.1W，面积 54.18mm²。",
+      "en": "Implemented CNN hardware accelerator covering architecture design, RTL design, verification platform, and logic simulation. Synthesized on SMIC 0.18μm process achieving 200K/s input feature map processing at 96.7MHz clock frequency, 1.1W power consumption, and 54.18mm² area."
     },
-    "link": "https://doi.org/10.xxxx/yyyyy",
+    "link": "https://github.com/HawaiiOcean",
     "featured": true
   },
   {
     "id": "pub-3",
     "title": {
-      "zh": "开源 EDA 工具链在先进工艺节点下的验证方法研究",
-      "en": "Validation Methodology for Open-Source EDA Toolchains at Advanced Technology Nodes"
+      "zh": "基于 EIC7700X 的 AI 边缘端教学辅助系统",
+      "en": "AI Edge Computing Teaching Assistant System Based on EIC7700X"
     },
-    "authors": ["Your Name", "Co-author D"],
-    "journal": { "zh": "电子设计自动化大会 (DAC) 海报, 2025", "en": "Design Automation Conference (DAC) Poster, 2025" },
+    "authors": ["韩汪洋"],
+    "journal": { "zh": "全国大学生集成电路创新创业大赛 · 全国一等奖, 2025", "en": "National IC Innovation Competition · First Prize, 2025" },
     "year": 2025,
     "description": {
-      "zh": "系统评估了 OpenROAD、Yosys 等开源 EDA 工具在 28nm 工艺节点下的综合与布局布线质量，与商业工具进行了全面对比分析。",
-      "en": "Systematically evaluated synthesis and place-and-route quality of open-source EDA tools including OpenROAD and Yosys at 28nm technology node, with comprehensive comparison against commercial tools."
+      "zh": "基于 EIC7700X 开发板和 AI 工具链进行 AI 边缘端应用开发，完成模型训练、量化、编译、部署全流程。通过 Yolo、ResNet34、Qwen2 等实现人脸检测、表情识别、语音/文本多模态交互等功能，实时监测学生情绪并进行个性化辅助教学。",
+      "en": "Developed AI edge application on EIC7700X platform covering model training, quantization, compilation, and deployment. Implemented face detection, emotion recognition, and multimodal interaction using Yolo, ResNet34, and Qwen2 for real-time student engagement monitoring."
     },
     "featured": true
   }

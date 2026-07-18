@@ -1,4 +1,126 @@
 ---
-// placeholder — will be replaced in Task 7
+// src/components/Nav.astro
+import { getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+import LangSwitch from './LangSwitch.astro';
+import navItems from '../data/nav.json';
+
+interface Props {
+  currentPath: string;
+  lang: 'zh' | 'en';
+}
+
+const { currentPath, lang } = Astro.props;
+const { t } = useTranslations(lang);
 ---
-<nav></nav>
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md
+         transition-all duration-300 border-b border-transparent"
+>
+  <nav class="max-w-content mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo / Name -->
+    <a
+      href={`/${lang}/`}
+      class="text-lg font-semibold text-text-primary hover:text-accent transition-colors"
+    >
+      Your Name
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-8">
+      {navItems.map((item) => (
+        <a
+          href={`#${item.id}`}
+          class="text-sm text-text-secondary hover:text-accent transition-colors duration-200"
+        >
+          {t(item.label)}
+        </a>
+      ))}
+      <LangSwitch currentPath={currentPath} />
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <div class="flex items-center gap-3 md:hidden">
+      <LangSwitch currentPath={currentPath} />
+      <button
+        id="menu-btn"
+        class="flex flex-col gap-1.5 p-2"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span class="block w-5 h-0.5 bg-text-primary transition-transform duration-300 origin-center" />
+        <span class="block w-5 h-0.5 bg-text-primary transition-opacity duration-300" />
+        <span class="block w-5 h-0.5 bg-text-primary transition-transform duration-300 origin-center" />
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Drawer -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden absolute top-16 left-0 right-0 bg-white border-b border-border shadow-sm"
+  >
+    <div class="flex flex-col px-6 py-4 gap-3">
+      {navItems.map((item) => (
+        <a
+          href={`#${item.id}`}
+          class="text-sm text-text-secondary hover:text-accent transition-colors py-2"
+        >
+          {t(item.label)}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  // Scroll shrink effect
+  const navbar = document.getElementById('navbar')!;
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > 80) {
+      navbar.classList.add('shadow-sm');
+      navbar.classList.add('border-border');
+    } else {
+      navbar.classList.remove('shadow-sm');
+      navbar.classList.remove('border-border');
+    }
+    lastScroll = currentScroll;
+  });
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menu-btn')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const bars = menuBtn.querySelectorAll('span');
+
+  menuBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isOpen));
+
+    // Hamburger → X animation
+    if (!isOpen) {
+      bars[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+    } else {
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '';
+      bars[2].style.transform = '';
+    }
+  });
+
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '';
+      bars[2].style.transform = '';
+    });
+  });
+</script>

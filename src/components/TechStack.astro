@@ -1,0 +1,46 @@
+---
+// src/components/TechStack.astro
+import { useTranslations } from '../i18n/utils';
+import ScrollReveal from './ScrollReveal.astro';
+import type { TechCategory } from '../types';
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const { t } = useTranslations(lang);
+const heading = lang === 'zh' ? '技术栈' : 'Tech Stack';
+
+import techData from '../data/techstack.json';
+const categories = (techData as { categories: TechCategory[] }).categories ?? [];
+---
+
+<section id="techstack" class="py-32 px-6">
+  <div class="max-w-content mx-auto">
+    <ScrollReveal>
+      <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-12">{heading}</h2>
+    </ScrollReveal>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {categories.map((category) => (
+        <ScrollReveal>
+          <div class="bg-surface rounded-lg border border-border p-6">
+            <h3 class="text-base font-semibold text-text-primary mb-4">{t(category.name)}</h3>
+            <div class="flex flex-wrap gap-2">
+              {category.items.map((item) => (
+                <span class="inline-flex items-center px-3 py-1.5
+                             bg-white border border-border rounded-full
+                             text-sm text-text-secondary font-mono
+                             hover:text-accent hover:border-accent hover:bg-accent/5
+                             transition-all duration-200 cursor-default">
+                  {item.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+      ))}
+    </div>
+  </div>
+</section>

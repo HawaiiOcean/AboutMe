@@ -1,0 +1,29 @@
+[
+  {
+    "id": "riscv-cpu",
+    "title": { "zh": "RISC-V 五级流水线 CPU", "en": "RISC-V 5-Stage Pipeline CPU" },
+    "description": { "zh": "基于 Verilog 实现的五级流水线 RISC-V 处理器，支持 RV32I 指令集，通过 FPGA 验证。", "en": "A 5-stage pipelined RISC-V processor in Verilog, supporting RV32I ISA, verified on FPGA." },
+    "category": "chip",
+    "tags": ["Verilog", "RISC-V", "FPGA", "SystemVerilog"],
+    "links": { "github": "https://github.com/username/riscv-cpu" },
+    "featured": true
+  },
+  {
+    "id": "ai-inference-accel",
+    "title": { "zh": "AI 推理加速器设计", "en": "AI Inference Accelerator Design" },
+    "description": { "zh": "设计一个面向 Transformer 推理的 systolic array 加速器，优化矩阵乘法效率。", "en": "Designed a systolic array accelerator for Transformer inference, optimizing matrix multiplication efficiency." },
+    "category": "ai",
+    "tags": ["PyTorch", "HLS", "Vivado", "Python"],
+    "links": { "github": "https://github.com/username/ai-accel" },
+    "featured": true
+  },
+  {
+    "id": "personal-website",
+    "title": { "zh": "个人网站", "en": "Personal Website" },
+    "description": { "zh": "基于 Astro + Tailwind CSS 构建的双语个人网站，纯静态部署。", "en": "A bilingual personal website built with Astro + Tailwind CSS, pure static deployment." },
+    "category": "frontend",
+    "tags": ["Astro", "Tailwind CSS", "TypeScript"],
+    "links": { "github": "https://github.com/username/personal-website", "demo": "https://username.github.io" },
+    "featured": false
+  }
+]

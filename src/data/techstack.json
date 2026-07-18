@@ -1,0 +1,36 @@
+{
+  "categories": [
+    {
+      "key": "chip-design",
+      "name": { "zh": "芯片前端设计", "en": "Chip Front-End Design" },
+      "items": [
+        { "name": "Verilog" },
+        { "name": "SystemVerilog" },
+        { "name": "Vivado" },
+        { "name": "ModelSim" },
+        { "name": "FPGA" }
+      ]
+    },
+    {
+      "key": "ai-infra",
+      "name": { "zh": "AI & Infra", "en": "AI & Infra" },
+      "items": [
+        { "name": "Python" },
+        { "name": "PyTorch" },
+        { "name": "HLS" },
+        { "name": "Linux" }
+      ]
+    },
+    {
+      "key": "frontend",
+      "name": { "zh": "前端开发", "en": "Frontend" },
+      "items": [
+        { "name": "TypeScript" },
+        { "name": "React" },
+        { "name": "Astro" },
+        { "name": "Tailwind CSS" },
+        { "name": "Figma" }
+      ]
+    }
+  ]
+}

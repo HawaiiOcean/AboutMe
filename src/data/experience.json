@@ -1,0 +1,16 @@
+[
+  {
+    "type": "education",
+    "title": { "zh": "集成电路工程 硕士", "en": "M.S. in IC Engineering" },
+    "organization": { "zh": "XX大学", "en": "XX University" },
+    "date": "2025 - 2028",
+    "description": { "zh": "研究方向：芯片前端设计", "en": "Research: Chip front-end design" }
+  },
+  {
+    "type": "education",
+    "title": { "zh": "电子科学与技术 学士", "en": "B.S. in Electronic Science" },
+    "organization": { "zh": "XX大学", "en": "XX University" },
+    "date": "2021 - 2025",
+    "description": { "zh": "主修课程：数字集成电路设计、计算机体系结构、VLSI设计", "en": "Courses: Digital IC Design, Computer Architecture, VLSI Design" }
+  }
+]

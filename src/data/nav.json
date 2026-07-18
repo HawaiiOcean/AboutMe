@@ -1,0 +1,7 @@
+[
+  { "id": "about", "label": { "zh": "关于", "en": "About" } },
+  { "id": "experience", "label": { "zh": "经历", "en": "Experience" } },
+  { "id": "techstack", "label": { "zh": "技术栈", "en": "Tech Stack" } },
+  { "id": "projects", "label": { "zh": "作品", "en": "Projects" } },
+  { "id": "contact", "label": { "zh": "联系", "en": "Contact" } }
+]

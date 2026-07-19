@@ -26,11 +26,11 @@ const profile = profileData as unknown as Profile;
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- Playfair Display (serif) + Inter (sans) + JetBrains Mono -->
+    <!-- Cormorant Garamond (serif) + Inter (sans) + IBM Plex Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -39,9 +39,9 @@ const profile = profileData as unknown as Profile;
   <body>
     <div class="lg:flex">
       <Sidebar lang={lang} profile={profile} currentPath={currentPath} />
-      <div class="lg:ml-[320px] min-h-screen w-full">
+      <div class="lg:ml-[300px] min-h-screen w-full">
         <ContentNav lang={lang} />
-        <main class="px-8 py-12 max-w-3xl mx-auto">
+        <main class="content-fade-mask px-8 py-12 max-w-3xl mx-auto">
           <slot />
         </main>
       </div>

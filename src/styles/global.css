@@ -10,4 +10,56 @@
   ::selection {
     @apply bg-accent/15;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Orchestrated entry — staggered delays via data attributes */
+  .entry-item { opacity: 0; }
+  .entry-item[data-delay="0"]   { animation: fade-scale 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0ms both; }
+  .entry-item[data-delay="1"]   { animation: fade-up 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 80ms both; }
+  .entry-item[data-delay="2"]   { animation: fade-up 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 160ms both; }
+  .entry-item[data-delay="3"]   { animation: fade-in 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 240ms both; }
+  .entry-item[data-delay="4"]   { animation: fade-up 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 320ms both; }
+  .entry-item[data-delay="5"]   { animation: fade-in 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 400ms both; }
+
+  /* Section divider */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 56px 0 48px;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8eaed;
+  }
+  .section-divider-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #9b7a2e;
+    flex-shrink: 0;
+  }
+  .section-divider-dot.animate {
+    animation: pulse-dot 1.2s ease-out 1 both;
+  }
+
+  /* Content fade into nav */
+  .content-fade-mask {
+    mask-image: linear-gradient(to bottom, transparent 0, black 40px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 40px);
+    padding-top: 40px;
+    margin-top: -40px;
+  }
 }

@@ -23,6 +23,10 @@ const sorted = [...publications]
 ---
 
 <section id="publications" class="py-16">
+  <div class="section-divider" aria-hidden="true">
+    <div class="section-divider-dot" id="publications-dot"></div>
+  </div>
+
   <div class="flex items-baseline justify-between mb-6">
     <h2 class="font-serif text-2xl font-bold text-text-primary">{heading}</h2>
   </div>
@@ -31,3 +35,19 @@ const sorted = [...publications]
     <PublicationCard pub={pub} lang={lang} ownerName={ownerName} />
   ))}
 </section>
+
+<script>
+  // One-time pulse animation when divider scrolls into view
+  const dot = document.getElementById('publications-dot');
+  if (dot) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          dot.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 1 });
+    observer.observe(dot);
+  }
+</script>

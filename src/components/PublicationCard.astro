@@ -11,9 +11,9 @@ interface Props {
 const { pub, lang, ownerName } = Astro.props;
 ---
 
-<article class="bg-surface rounded-xl p-5 mb-4">
+<article class="group bg-surface rounded-lg p-5 mb-4 border-l-2 border-transparent transition-all duration-200 hover:border-l-accent">
   <!-- Title -->
-  <h3 class="font-serif font-semibold text-base text-text-primary mb-1.5 leading-snug">
+  <h3 class="font-serif font-semibold text-base text-text-primary mb-1.5 leading-snug transition-transform duration-200 group-hover:translate-x-1">
     {pub.title[lang]}
   </h3>
 
@@ -30,7 +30,7 @@ const { pub, lang, ownerName } = Astro.props;
   </p>
 
   <!-- Journal -->
-  <p class="text-xs text-accent-light mt-1 font-medium">
+  <p class="text-xs text-accent-light mt-1 font-medium font-mono">
     {pub.journal[lang]}
   </p>
 

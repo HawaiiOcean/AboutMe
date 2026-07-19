@@ -18,14 +18,16 @@ const links: NavLink[] = [
 ---
 
 <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-sm border-b border-border">
-  <div class="max-w-3xl mx-auto px-8 py-3 flex items-center gap-1">
+  <div class="max-w-3xl mx-auto px-8 py-3 flex items-center gap-6 relative">
     {links.map((link) => (
       <a
         href={`#${link.id}`}
         data-nav={link.id}
-        class="px-4 py-2 rounded-lg text-sm text-text-secondary
-               hover:text-text-primary transition-colors
-               data-[active=true]:bg-nav-active data-[active=true]:text-text-primary data-[active=true]:font-medium"
+        class="relative text-sm py-2 transition-colors duration-200
+               data-[active=true]:text-accent data-[active=true]:font-medium
+               text-text-secondary hover:text-text-primary
+               after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-accent after:transition-all after:duration-300
+               after:w-0 data-[active=true]:after:w-full"
       >
         {link.label[lang]}
       </a>
